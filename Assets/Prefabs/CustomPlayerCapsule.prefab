@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1971632436222589943}
   - component: {fileID: 1971632436222589944}
   - component: {fileID: 1971632436222589945}
-  - component: {fileID: 1971632436222589942}
   m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
@@ -82,20 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1971632436222589942
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971632436222589940}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2742894070779604962
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,8 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushLayers:
     serializedVersion: 2
-    m_Bits: 0
-  canPush: 0
+    m_Bits: 8
+  canPush: 1
   strength: 1.1
 --- !u!114 &7532987409154902029
 MonoBehaviour:
@@ -365,11 +350,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4414681555506131342, guid: 4224a1daf49ac1548bb2c4cb1b0e0cd1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.375
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4414681555506131342, guid: 4224a1daf49ac1548bb2c4cb1b0e0cd1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 4414681555506131342, guid: 4224a1daf49ac1548bb2c4cb1b0e0cd1, type: 3}
       propertyPath: m_LocalRotation.w

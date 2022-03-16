@@ -23,11 +23,11 @@ public class Bullet : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Destructible"))
             {
-                GameObject explosion = Explosions.prefabs[Random.Range(0, Explosions.prefabs.Length)] as GameObject;
-                Instantiate(explosion, transform.position, Quaternion.identity);
-                _body.detectCollisions = false;
-                _body.velocity = Vector3.zero;
-                transform.position = new Vector3(0, 0, -10);
+                Explode();
+                if(other.gameObject.GetComponent<Bullet>()?.Explode() == null)
+                {
+                    Debug.Log(other.contacts[0].point); // TODO : break object
+                }
             }
             _firstContact = false;
         }
@@ -37,5 +37,15 @@ public class Bullet : MonoBehaviour
     {
         _firstContact = true;
         _body.detectCollisions = true;
+    }
+
+    public bool Explode()
+    {
+        GameObject explosion = Explosions.prefabs[Random.Range(0, Explosions.prefabs.Length)] as GameObject;
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        _body.detectCollisions = false;
+        _body.velocity = Vector3.zero;
+        transform.position = new Vector3(0, 0, -10);
+        return true;
     }
 }
