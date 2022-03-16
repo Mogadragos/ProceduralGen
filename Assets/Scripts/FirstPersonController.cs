@@ -66,7 +66,7 @@ namespace StarterAssets
 
 		private PlayerInput _playerInput;
 		private CharacterController _controller;
-		private StarterAssetsInputs _input;
+		protected StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
@@ -82,7 +82,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void Start()
+		protected void Start()
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
@@ -93,7 +93,7 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 		}
 
-		private void Update()
+		protected void Update()
 		{
 			JumpAndGravity();
 			GroundedCheck();
