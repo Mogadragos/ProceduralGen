@@ -93,5 +93,11 @@ public struct Triangle
         return new Vector3(u, v, w);
     }
 
+    public bool Split(Plane pl, IntersectionResult result)
+    {
+        Intersector.Intersect(pl, this, result);
+
+        return result.Success;
+    }
 }
 
