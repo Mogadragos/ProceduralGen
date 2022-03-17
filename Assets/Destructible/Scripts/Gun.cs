@@ -31,4 +31,14 @@ public class Gun : MonoBehaviour
 
         bullet.velocity = transform.TransformDirection(Vector3.forward * Power);
     }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private bool _firstContact = true;
     private Rigidbody _body;
 
     protected virtual void Start()
@@ -12,20 +11,15 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(_firstContact)
+        Impact();
+        if (other.gameObject.CompareTag("Destructible"))
         {
-            if (other.gameObject.CompareTag("Destructible"))
-            {
-                Impact();
-                Debug.Log(other.contacts[0].point); // TODO : break object
-            }
-            _firstContact = false;
-        }
+            Debug.Log(other.contacts[0].point); // TODO : break object
+        };
     }
 
     public virtual void Fire()
     {
-        _firstContact = true;
         _body.detectCollisions = true;
     }
 
