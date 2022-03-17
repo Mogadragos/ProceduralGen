@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Intersector
 {
-    public static bool Intersect(Plane plane, Line line, Vector3 q)
+    public static bool Intersect(Plane plane, Line line, out Vector3 q)
     {
         return Intersect(plane, line.PointA, line.PointB, out q);
     }
