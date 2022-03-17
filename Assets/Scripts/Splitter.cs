@@ -163,11 +163,163 @@ public class Splitter
     private static List<Triangle> CreateFrom(List<Vector3> crossHull, Vector3 normale)
     {
         List<Triangle> triangles;
-        if (Triangulator.MonotoneChain(crossHull, normale, out triangles);
+        if (Triangulator.MonotoneChain(crossHull, normale, out triangles))
+        {
+            return triangles;
+        }
+        return null;
     }
 
     private static SplitElement CreateFrom(SlicedSubMesh[] meshes, List<Triangle> cross, int crossSectionIndex)
     {
-        l
+        int upperCount = 0;
+        int lowerCount = 0;
+
+        for (int i = 0; i < meshes.Length; i++)
+        {
+            upperCount += meshes[i].UpperHull.Count;
+            lowerCount += meshes[i].LowerHull.Count;
+        }
+
+        Mesh upperHull = CreateUpperHull(meshes, upperCount, cross, crossSectionIndex);
+        Mesh lowerHull = CreateLowerHull(meshes, lowerCount, cross, crossSectionIndex);
+
+        return new SplitElement(upperHull, lowerHull);
+    }
+
+
+    private static Mesh CreateUpperHull(SlicedSubMesh[] mesh, int total, List<Triangle> crossSection, int crossSectionIndex)
+    {
+        return CreateHull(mesh, total, crossSection, crossSectionIndex, true);
+    }
+
+    private static Mesh CreateLowerHull(SlicedSubMesh[] mesh, int total, List<Triangle> crossSection, int crossSectionIndex)
+    {
+        return CreateHull(mesh, total, crossSection, crossSectionIndex, false);
+    }
+    private static Mesh CreateHull(SlicedSubMesh[] meshes, int total, List<Triangle> crossSection, int crossIndex, bool isUpper)
+    {
+        if (total <= 0)
+        {
+            return null;
+        }
+        int crossCount = crossSection != null ? crossSection.Count : 0;
+        int arraylen = (total + crossCount) * 3;
+        bool hasNorm = meshes[0].HasNormale;
+
+        Mesh mesh = new Mesh();
+        mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+
+        Vector3[] vertices = new Vector3[arraylen];
+        Vector3[] norms = hasNorm ? new Vector3[arraylen] : null;
+
+
+        List<int[]> triangles = new List<int[]>(meshes.Length);
+
+        int vIndex = 0;
+
+        //generation des vertices
+        for (int submesh = 0; submesh < meshes.Length; submesh++)
+        {
+            List<Triangle> hull = isUpper ? meshes[submesh].UpperHull : meshes[submesh].LowerHull;
+            int[] indices = new int[hull.Count * 3];
+
+            // remplissage des mesh
+            for (int i = 0, triIndex = 0; i < hull.Count; i++, triIndex += 3)
+            {
+                Triangle triangle = hull[i];
+
+                //ajout des vertices
+                vertices[vIndex] = triangle.PointA;
+                vertices[vIndex + 1] = triangle.PointB;
+                vertices[vIndex + 2] = triangle.PointC;
+                if (hasNorm)
+                {
+                    norms[vIndex] = triangle.NormA;
+                    norms[vIndex + 1] = triangle.NormB;
+                    norms[vIndex + 2] = triangle.NormC;
+                }
+
+                //retour des triangles en sens horaire par l'intersecteur
+                indices[triIndex] = vIndex;
+                indices[triIndex + 1] = vIndex + 1;
+                indices[triIndex + 2] = vIndex + 2;
+
+                vIndex += 3;
+
+            }
+
+            triangles.Add(indices);
+        }
+
+        if (crossSection != null && crossCount > 0)
+        {
+            int[] crossindices = new int[crossCount * 3];
+
+            for (int i = 0, triIndex = 0; i <crossCount; i++, triIndex += 3)
+            {
+                Triangle triangle = crossSection[i];
+
+                //ajout des vertices
+                vertices[vIndex] = triangle.PointA;
+                vertices[vIndex + 1] = triangle.PointB;
+                vertices[vIndex + 2] = triangle.PointC;
+                if (hasNorm)
+                {
+                    norms[vIndex] = triangle.NormA;
+                    norms[vIndex + 1] = triangle.NormB;
+                    norms[vIndex + 2] = triangle.NormC;
+                }
+
+                //retour des triangles en sens horaire par l'intersecteur
+                if (isUpper)
+                {
+                    crossindices[triIndex] = vIndex;
+                    crossindices[triIndex + 1] = vIndex + 1;
+                    crossindices[triIndex + 2] = vIndex + 2;
+                }
+                else
+                {
+                    crossindices[triIndex] = vIndex;
+                    crossindices[triIndex + 1] = vIndex +2;
+                    crossindices[triIndex + 2] = vIndex + 1;
+                }
+                
+
+                vIndex += 3;
+
+            }
+
+            if (triangles.Count <= crossIndex)
+            {
+                triangles.Add(crossindices);
+            }
+            else
+            {
+                int[] prevTriangles = triangles[crossIndex];
+                int[] merged = new int[prevTriangles.Length + crossindices.Length];
+
+                Array.Copy(prevTriangles, merged, prevTriangles.Length);
+                Array.Copy(crossindices,0,merged, prevTriangles.Length, crossindices.Length);
+
+                triangles[crossIndex] = merged;
+            }
+        }
+        mesh.subMeshCount = triangles.Count;
+
+        mesh.vertices = vertices;
+
+        if (hasNorm)
+        {
+            mesh.normals = norms;
+        }
+
+        //ajout des submesh
+        for (int i = 0; i < triangles.Count; i++)
+        {
+            mesh.SetTriangles(triangles[i], i, false);
+        }
+        return mesh;
+       
     }
 }
