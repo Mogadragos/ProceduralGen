@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour
         Impact();
         if (other.gameObject.CompareTag("Destructible"))
         {
+            Destroy(other.gameObject);
+            other.gameObject.SplitInstantiate(other.contacts[0].point, new Vector3(0, 0, 1));
             Debug.Log(other.contacts[0].point); // TODO : break object
         };
     }
