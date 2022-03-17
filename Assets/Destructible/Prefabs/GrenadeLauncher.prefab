@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1185585451329735115}
   - component: {fileID: 1254782890348372328}
   m_Layer: 8
-  m_Name: Gun
+  m_Name: GrenadeLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,5 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28452c9058105424596b8ac186cf5441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Power: 10
+  BulletsNumber: 5
+  FireTimeout: 0.5
   Bullet: {fileID: 689345340298143213, guid: 65a00704852962f468081917ebfd4a85, type: 3}
   FireOrigin: {fileID: 6714323603341447368}

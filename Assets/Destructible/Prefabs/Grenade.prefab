@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6783649960529979230}
   - component: {fileID: 4658472800744578504}
   - component: {fileID: 6342771629885313272}
-  - component: {fileID: 6028253246257701507}
+  - component: {fileID: 7631965606196748687}
   - component: {fileID: 689345340298143213}
-  - component: {fileID: 8287888665135380461}
+  - component: {fileID: 1736562823448863217}
   m_Layer: 0
-  m_Name: Bullet
-  m_TagString: Destructible
+  m_Name: Grenade
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8539642665394240724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.2}
+  m_LocalScale: {x: 0.15, y: 0.2, z: 0.15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8539642665394240724}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6342771629885313272
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6028253246257701507
-BoxCollider:
+--- !u!135 &7631965606196748687
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,7 +95,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: 2}
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &689345340298143213
 Rigidbody:
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8287888665135380461
+--- !u!114 &1736562823448863217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8539642665394240724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e1fabe09d31c99479b7e4bf37598d4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2293e04a01c0f8043b6425c42f2c00f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplodeTimeout: 2
