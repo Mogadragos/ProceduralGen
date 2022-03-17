@@ -8,8 +8,6 @@ using StarterAssets;
 public class CustomFirstPersonController : FirstPersonController
 {
 	[Header("Player")]
-	[Tooltip("Time required to pass before being able to fire again. Set to 0f to instantly fire again")]
-	public float FireTimeout = 0.1f;
 
 	[Tooltip("Gun GameObject")]
 	public Gun Gun;
@@ -30,7 +28,7 @@ public class CustomFirstPersonController : FirstPersonController
 		base.Start();
 		if(_input is CustomInputs)
         {
-			_fireTimeoutDelta = FireTimeout;
+			_fireTimeoutDelta = Gun.FireTimeout;
 			_customInput = _input as CustomInputs;
 		}
 	}
@@ -48,7 +46,7 @@ public class CustomFirstPersonController : FirstPersonController
 		{
 			Gun.Fire();
 			// reset the fire timeout timer
-			_fireTimeoutDelta = FireTimeout;
+			_fireTimeoutDelta = Gun.FireTimeout;
 		}
 
 		// fire timeout

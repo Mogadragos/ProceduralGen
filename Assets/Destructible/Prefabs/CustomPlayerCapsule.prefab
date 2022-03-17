@@ -165,7 +165,6 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 7558918871443445433}
   TopClamp: 89
   BottomClamp: -89
-  FireTimeout: 0.1
   Gun: {fileID: 4253029186225663792}
 --- !u!114 &5400054304355386642
 MonoBehaviour:
@@ -204,6 +203,8 @@ MonoBehaviour:
   cursorLocked: 1
   cursorInputForLook: 1
   fire: 0
+  weaponNext: 0
+  weaponPrev: 0
 --- !u!114 &2742894070779604974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7839030932099585990, guid: 4224a1daf49ac1548bb2c4cb1b0e0cd1, type: 3}
       propertyPath: m_Name
-      value: Gun
+      value: GrenadeLauncher
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4224a1daf49ac1548bb2c4cb1b0e0cd1, type: 3}

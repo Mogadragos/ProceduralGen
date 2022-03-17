@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public float Power = 10;
+    public int BulletsNumber = 20;
+    [Tooltip("Time required to pass before being able to fire again. Set to 0f to instantly fire again")]
+    public float FireTimeout = 0.1f;
+
     public Rigidbody Bullet;
     public Transform FireOrigin;
 
@@ -12,7 +17,7 @@ public class Gun : MonoBehaviour
     public void Fire()
     {
         Rigidbody bullet;
-        if (_bullets.Count < 10)
+        if (_bullets.Count < BulletsNumber)
         {
             bullet = Instantiate(Bullet, FireOrigin.position, transform.rotation);
         } else
@@ -24,6 +29,6 @@ public class Gun : MonoBehaviour
         }
         _bullets.Enqueue(bullet);
 
-        bullet.velocity = transform.TransformDirection(Vector3.forward * 15);
+        bullet.velocity = transform.TransformDirection(Vector3.forward * Power);
     }
 }
