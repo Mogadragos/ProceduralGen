@@ -62,8 +62,6 @@ public class CustomFirstPersonController : FirstPersonController
         {
             _fireTimeoutDelta -= Time.deltaTime;
         }
-
-        _customInput.fire = false;
     }
 
     private void ChangeWeapon()

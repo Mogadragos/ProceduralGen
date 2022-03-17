@@ -43,12 +43,12 @@
                 },
                 {
                     "name": "Fire",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "08a14c03-151c-4eea-8cbb-927d8041bb11",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "WeaponChange",
@@ -241,7 +241,7 @@
                     "name": "",
                     "id": "eea2494a-5550-4605-9c5b-f0b0c0cc1ca8",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Fire",
