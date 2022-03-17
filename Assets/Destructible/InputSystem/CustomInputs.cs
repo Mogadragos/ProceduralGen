@@ -10,6 +10,7 @@ public class CustomInputs : StarterAssetsInputs
 {
     [Header("Character Input Values")]
     public bool fire;
+    public bool weaponChange;
     public bool weaponNext;
     public bool weaponPrev;
 
@@ -34,6 +35,7 @@ public class CustomInputs : StarterAssetsInputs
     }
     public void WeaponChangeInput(bool direction)
     {
+        weaponChange = true;
         if (direction) weaponNext = true;
         else weaponPrev = true;
     }
